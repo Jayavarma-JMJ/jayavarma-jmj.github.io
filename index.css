@@ -28,11 +28,11 @@
 body {
     background-color: var(--bg-color);
     font-family: RobotoFlex;
+    overflow-x: scroll;    
 }
 
 body *{
     box-sizing: border-box;
-    
 }
 
 .container {
@@ -42,9 +42,9 @@ body *{
 }
 
 .outline {
-    max-width: 65rem;
-    grid-template-columns: auto auto auto;
-    grid-template-rows: repeat(3,auto);
+    max-width: 60rem;
+    grid-template-columns: minmax(min-content, 0.5fr) minmax(min-content, 1fr) minmax(min-content, 1fr);
+    grid-template-rows: repeat(3,1fr);
     gap: 2rem;
 
     padding: 1rem;
@@ -58,22 +58,21 @@ body *{
     grid-template-columns: repeat(3, auto);
     grid-template-rows: auto auto auto auto;
 
-    padding: 1rem 1rem 1rem 1rem;
+    padding: 1rem;
+    margin: 0rem 0rem 0rem 2rem;
 
 }
 
 .aboutCard {
     grid-row: 2 / 5;
-    grid-column: 1 / 6;
 
     background-color: var(--highlight-color);
     border-radius: 2rem;
-    margin: -2rem -2rem -2rem -2rem;
+    margin: 1rem -2rem -2rem -2rem;
 }
 
 .wide {
-    grid-column: 1 / 6;
-    justify-self: center;
+    grid-column: 1 / 4;
 }
 
 .photo{
@@ -94,31 +93,20 @@ body *{
 
 .iconbar {
     grid-row: 4 / 5;
-    grid-column: 1 / 6;
     display: grid;
+    grid-template-columns: repeat(5,1fr);
+
+    align-content: center;
 }
 
 .icons {
     width: 3rem;
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
 }
 
 a:has(img) {
-    grid-row: 4 / 5;
-
     justify-self: center;
-}
-
-.name {
-    grid-row: 1 / 2;
-    grid-column: 2 / 4;
-
-    font-size: 3rem;
-    width: max-content;
-    justify-self:end;
-    margin: 2rem 0rem 2rem 2rem;
-    font-family: ClimateCrisis;
-    transform: scale(1,2);
-    text-shadow: -1.5rem 0.75rem 0px var(--highlight-color);
 }
 
 .links {
@@ -141,4 +129,84 @@ a:has(img) {
     padding: 2rem 0;
     font-size: 2rem;
     font-weight: 900;
+    transition-duration: 0.25s;
+    transition-timing-function: ease;
+}
+
+.linecontainer {
+    grid-row: 1 / 2;
+    grid-column: 2 / 4; 
+
+    position: relative;
+    margin: 0rem 1rem 0rem 0rem;
+}
+
+.name {
+    font-size: 3rem;
+    width: max-content;
+    justify-self:end;
+    margin: 2rem 0rem 2rem 2rem;
+    font-family: ClimateCrisis;
+    transform: scale(1,2);
+    position: absolute;
+    /* text-shadow: -1.5rem 0.75rem 0px var(--highlight-color); */
+}
+
+.nameshadow {
+    color: transparent;
+    -webkit-text-stroke: 8px var(--bg-color);
+}
+
+
+.line { 
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+
+    fill: none;
+    stroke: #000000;
+    stroke-width: 10;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    stroke-opacity: 1;
+    
+    stroke-dasharray: 400;   
+    stroke-dashoffset: 400;
+
+    animation: undraw 1.5s forwards;
+    
+}
+
+@media (hover: hover) {
+    .links a:hover {
+        color:  var(--bg-color);
+        background-color: var(--highlight-color);
+        transform: scale(1, 1.05);
+        transition-duration: 0.25s;
+        transition-timing-function: ease;
+    }
+
+    .icons:hover {
+        transform: scale(1.25);
+        transition-duration: 0.25s;
+        transition-timing-function: ease;
+    }
+
+    body:has(.name:hover) .line {
+        animation: draw 1.5s forwards;
+    }
+
+}
+
+@keyframes draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+}
+@keyframes undraw {
+    to {
+      stroke-dashoffset: 400;
+    }
 }
